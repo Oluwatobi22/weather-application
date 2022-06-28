@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.css">
+    <style>
+        body {
+            background-image: url(./we1.jpg);
+            background-repeat:no-repeat; 
+            background-size:cover;
+            animation: move 30s linear infinite;
+        }
+        @keyframes move {
+            0%{
+                transform: scale(0px); 
+                background-image: url(./we1.jpg);
+            }
+            25%{
+                transform: scale(0px); 
+                background-image: url(w2.jpg);
+            }
+            50%{
+                transform: scale(0px); 
+                background-image: url(./w3.jpg);
+            } 
+            75%{
+                transform: scale(0px); 
+                background-image: url(./w4.jpg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-7">
+                <div class="d-flex">
+                    <input type="search" id="take" class="form-control mx-4">
+                    <button onclick="ope()" class="btn btn-success btn-lg text-uppercase text-dark ">display</button>
+                </div>  
+            </div>  
+        </div>
+    </div>
+    <div class="container" style="width:150% ; height:50%;position: relative; top: 406px;">
+        <div class="row">
+            <div class="col-md-12 border border-white border-3 b" style="width: 100px; height:106px; background-color:white;">
+                <div class="d-flex mt-1">
+                    <div  style="font-size: 34px;" class="mx-4">
+                        <h4 class="text-dark">Temperature</h4>
+                        <h3 id="kk" style="color:green"></h3>
+                    </div>
+                    <div  style="font-size: 34px; color: black" class="mx-4">
+                        <h4 class="text-dark">location</h4>
+                        <h3 id="country" style="color:brown"></h3>
+                    </div>
+                    <div  style="font-size: 34px; color: blue" class="mx-4">
+                        <h4 class="text-dark">weather</h4>
+                        <h3 id="named" style="color:brown"></h3>
+                    </div>
+                    <div  style="font-size: 34px; color: black;" class="mx-4">
+                        <h4 class="text-dark">wind-speed</h4>
+                        <h3 id="deep" style="color:brown"></h3>
+                    </div>
+                    <div  style="font-size: 34px;" class="mx-4">
+                        <h4 class="text-dark">Humidity</h4>
+                        <h3 id="Hum" style="color:purple"></h3>
+                    </div>
+                    <div  style="font-size: 34px" class="mx-4">
+                        <h4 class="text-dark">zone</h4>
+                        <h3 id="zone" style="color:orange"></h3>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function ope(){
+            var place = take.value;
+            const key = "ae4d87cab3bbf0050c6e640dee325718";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=${key}`;
+            let response = await fetch(url);
+            let convert = await response.json();
+            console.log(convert);
+            kk.innerHTML = convert.main.temp;
+            country.innerHTML = convert.name;
+            named.innerHTML = convert.weather[0].description;
+            deep.innerHTML = convert.wind.speed;
+            Hum.innerHTML = convert.main.humidity;
+            zone.innerHTML = convert.sys.timezone;
+            zone.innerHTML = convert.sys.country;
+           
+        }
+    </script>
+</body>
+</html>
